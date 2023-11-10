@@ -27,7 +27,7 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(name = "idTarefa")
     private Tarefa tarefas;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "idPermissao")
     private Permissao permissao;
 }

@@ -1,6 +1,7 @@
 package og.net.api.service;
 
 import lombok.AllArgsConstructor;
+import og.net.api.exception.DadosNaoEncontradoException;
 import og.net.api.model.dto.IDTO;
 import og.net.api.model.dto.ProjetoCadastroDTO;
 import og.net.api.model.entity.Propriedade;
@@ -35,10 +36,13 @@ public class PropriedadeService {
         propriedadeRepository.save(propriedade);
     }
 
-    public void editar(IDTO dto) {
+    public void editar(IDTO dto) throws DadosNaoEncontradoException {
         ProjetoCadastroDTO propriedadeCadastroDTO = (ProjetoCadastroDTO) dto;
         Propriedade propriedade = new Propriedade();
         BeanUtils.copyProperties(propriedadeCadastroDTO,propriedade);
+        if (!propriedadeRepository.existsById(propriedade.getId())){
+            throw new DadosNaoEncontradoException();
+        }
         propriedadeRepository.save(propriedade);
     }
 }

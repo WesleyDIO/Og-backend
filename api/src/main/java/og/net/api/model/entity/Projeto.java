@@ -28,7 +28,7 @@ public class Projeto {
     private Set<Tarefa> tarefas;
     @OneToMany
     private Set<Propriedade> propriedades;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "idUsuario")
     private Usuario usuario;
 }
