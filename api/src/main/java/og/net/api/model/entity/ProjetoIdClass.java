@@ -13,5 +13,5 @@ public class ProjetoIdClass implements Serializable {
 
     private Integer idProjeto;
     private Integer idUsuario;
-    private Integer id;
+    private Permissao permissao;
 }

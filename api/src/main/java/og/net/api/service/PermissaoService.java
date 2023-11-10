@@ -3,11 +3,7 @@ package og.net.api.service;
 import lombok.AllArgsConstructor;
 import og.net.api.model.dto.IDTO;
 import og.net.api.model.dto.PermissaoCadastroDTO;
-import og.net.api.model.dto.UsuarioCadastroDTO;
-import og.net.api.model.entity.Permissao;
-import og.net.api.model.entity.Usuario;
 import og.net.api.repository.PermissaoRepository;
-import og.net.api.repository.UsuarioRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 

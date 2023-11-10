@@ -27,7 +27,6 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(name = "idTarefa")
     private Tarefa tarefas;
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "idPermissao")
+    @Enumerated(EnumType.STRING)
     private Permissao permissao;
 }

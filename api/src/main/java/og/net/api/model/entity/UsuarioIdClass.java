@@ -12,6 +12,6 @@ import java.io.Serializable;
 public class UsuarioIdClass implements Serializable {
     private Integer idTarefa;
     private Integer idUsuario;
-    private Integer idPermissao;
+    private Permissao permissao;
 
 }
