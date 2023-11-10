@@ -45,6 +45,19 @@ public class UsuarioService {
         usuarioRepository.save(usuario);
     }
 
+    public List<Usuario> buscarUsuariosNome(String nome){
+        return usuarioRepository.findByNome(nome);
+    }
+
+    public List<Usuario> buscarUsuariosUsername(String username){
+        return usuarioRepository.findByUsername(username);
+    }
+
+    public List<Usuario> buscarUsuariosEmail(String email){
+        return usuarioRepository.findByEmail(email);
+    }
+
+
     public void editar(IDTO dto) throws DadosNaoEncontradoException {
         UsuarioCadastroDTO ucdto = (UsuarioCadastroDTO) dto;
         Usuario usuario = new Usuario();

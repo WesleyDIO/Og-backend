@@ -32,6 +32,33 @@ public class UsuarioController {
         }
     }
 
+    @GetMapping("/nome")
+    public ResponseEntity<Collection<Usuario>> buscarUsuariosNome(@RequestParam String nome){
+        try{
+            return new ResponseEntity<>(usuarioService.buscarUsuariosNome(nome),HttpStatus.OK);
+        }catch (NoSuchElementException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/username")
+    public ResponseEntity<Collection<Usuario>> buscarUsuariosUsername(@RequestParam String username){
+        try{
+            return new ResponseEntity<>(usuarioService.buscarUsuariosUsername(username),HttpStatus.OK);
+        }catch (NoSuchElementException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/email")
+    public ResponseEntity<Collection<Usuario>> buscarUsuariosEmail(@RequestParam String email){
+        try{
+            return new ResponseEntity<>(usuarioService.buscarUsuariosEmail(email),HttpStatus.OK);
+        }catch (NoSuchElementException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping
     public ResponseEntity<Collection<Usuario>> buscarTodos(){
         try{

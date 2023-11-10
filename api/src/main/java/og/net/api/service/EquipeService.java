@@ -7,6 +7,7 @@ import og.net.api.exception.EquipeNaoEncontradaException;
 import og.net.api.model.dto.EquipeCadastroDTO;
 import og.net.api.model.dto.IDTO;
 import og.net.api.model.entity.Equipe;
+import og.net.api.model.entity.Usuario;
 import og.net.api.repository.EquipeRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,10 @@ public class EquipeService {
             throw new EquipeNaoEncontradaException();
         }
         equipeRepository.findById(id).get();
+    }
+
+    public List<Equipe> buscarEquipesNome(String nome){
+        return equipeRepository.findByNome(nome);
     }
 
     public List<Equipe> buscarTodos(){

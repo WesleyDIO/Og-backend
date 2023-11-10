@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import og.net.api.exception.*;
 import og.net.api.model.dto.ProjetoCadastroDTO;
 import og.net.api.model.entity.Projeto;
+import og.net.api.model.entity.Usuario;
 import og.net.api.service.ProjetoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,15 @@ public class ProjetoController {
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (ProjetoNaoEncontradoException e){
             e.getMessage();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/nome")
+    public ResponseEntity<Collection<Projeto>> buscarProjetoNome(@RequestParam String nome){
+        try{
+            return new ResponseEntity<>(projetoService.buscarProjetosNome(nome),HttpStatus.OK);
+        }catch (NoSuchElementException e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

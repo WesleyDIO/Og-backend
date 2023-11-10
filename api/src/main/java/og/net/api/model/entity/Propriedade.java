@@ -15,7 +15,7 @@ public class Propriedade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String nome_propriedade;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    private String nome;
+    @Enumerated(EnumType.STRING)
     private Tipo tipo;
 }

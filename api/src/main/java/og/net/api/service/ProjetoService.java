@@ -7,6 +7,7 @@ import og.net.api.exception.ProjetoNaoEncontradoException;
 import og.net.api.model.dto.IDTO;
 import og.net.api.model.dto.ProjetoCadastroDTO;
 import og.net.api.model.entity.Projeto;
+import og.net.api.model.entity.Usuario;
 import og.net.api.repository.ProjetoRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,10 @@ public class ProjetoService {
             throw new ProjetoNaoEncontradoException();
         }
         projetoRepository.findById(id).get();
+    }
+
+    public List<Projeto> buscarProjetosNome(String nome){
+        return projetoRepository.findByNome(nome);
     }
 
     public List<Projeto> buscarTodos(){

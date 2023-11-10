@@ -7,6 +7,7 @@ import og.net.api.exception.TarefaJaExistenteException;
 import og.net.api.model.dto.IDTO;
 import og.net.api.model.dto.TarefaCadastroDTO;
 import og.net.api.model.entity.Tarefa;
+import og.net.api.model.entity.Usuario;
 import og.net.api.repository.TarefaRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,10 @@ public class TarefaService {
             throw new TarefaInesxistenteException();
         }
         tarefaRepository.findById(id).get();
+    }
+
+    public List<Tarefa> buscarTarefasNome(String nome){
+        return tarefaRepository.findByNome(nome);
     }
 
     public List<Tarefa> buscarTodos(){

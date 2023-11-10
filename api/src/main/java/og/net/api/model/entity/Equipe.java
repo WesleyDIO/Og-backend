@@ -17,7 +17,7 @@ public class Equipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String nome_equipe;
+    private String nome;
     private String descricao;
     @OneToMany
     private Set<Usuario> usuarios;

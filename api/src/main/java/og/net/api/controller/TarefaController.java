@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import og.net.api.exception.*;
 import og.net.api.model.dto.TarefaCadastroDTO;
 import og.net.api.model.dto.UsuarioCadastroDTO;
+import og.net.api.model.entity.Projeto;
 import og.net.api.model.entity.Tarefa;
 import og.net.api.model.entity.Usuario;
 import og.net.api.service.TarefaService;
@@ -29,6 +30,15 @@ public class TarefaController {
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (TarefaInesxistenteException e){
             e.getMessage();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/nome")
+    public ResponseEntity<Collection<Tarefa>> buscarTarefasNome(@RequestParam String nome){
+        try{
+            return new ResponseEntity<>(tarefaService.buscarTarefasNome(nome),HttpStatus.OK);
+        }catch (NoSuchElementException e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

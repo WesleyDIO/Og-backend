@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import og.net.api.exception.*;
 import og.net.api.model.dto.EquipeCadastroDTO;
 import og.net.api.model.entity.Equipe;
+import og.net.api.model.entity.Tarefa;
 import og.net.api.service.EquipeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,15 @@ public class EquipeController {
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (EquipeNaoEncontradaException e){
             e.getMessage();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/nome")
+    public ResponseEntity<Collection<Equipe>> buscarEquipesNome(@RequestParam String nome){
+        try{
+            return new ResponseEntity<>(equipeService.buscarEquipesNome(nome),HttpStatus.OK);
+        }catch (NoSuchElementException e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
