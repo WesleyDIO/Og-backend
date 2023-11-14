@@ -12,4 +12,5 @@ import java.util.List;
 public interface TarefaRepository extends JpaRepository<Tarefa, Integer> {
 
     List<Tarefa> findByNome(String nome);
+    List<Tarefa> findByAtivo(Boolean ativo);
 }

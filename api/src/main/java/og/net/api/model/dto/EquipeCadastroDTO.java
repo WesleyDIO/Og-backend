@@ -14,7 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class EquipeCadastroDTO implements IDTO {
 
-    private String nome_equipe;
+    private String nome;
     private String descricao;
     private Set<Usuario> usuarios;
 }

@@ -14,7 +14,7 @@ import java.util.Set;
 public class EquipeEdicaoDTO implements IDTO {
 
     private Integer id;
-    private String nome_equipe;
+    private String nome;
     private String descricao;
     private Set<Usuario> usuarios;
 }

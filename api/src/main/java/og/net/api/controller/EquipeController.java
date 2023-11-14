@@ -3,6 +3,7 @@ package og.net.api.controller;
 import lombok.AllArgsConstructor;
 import og.net.api.exception.*;
 import og.net.api.model.dto.EquipeCadastroDTO;
+import og.net.api.model.dto.EquipeEdicaoDTO;
 import og.net.api.model.entity.Equipe;
 import og.net.api.service.EquipeService;
 import org.springframework.http.HttpStatus;
@@ -22,8 +23,8 @@ public class EquipeController {
     @GetMapping("/{id}")
     public ResponseEntity<Equipe> buscarUm(@PathVariable Integer id){
         try {
-            equipeService.buscarUm(id);
-            return new ResponseEntity<>(HttpStatus.OK);
+
+            return new ResponseEntity<>(equipeService.buscarUm(id),HttpStatus.OK);
         }catch (EquipeNaoEncontradaException e){
             e.getMessage();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -65,9 +66,9 @@ public class EquipeController {
     }
 
     @PutMapping
-    public ResponseEntity<Equipe> editar(@RequestBody EquipeCadastroDTO equipeCadastroDTO){
+    public ResponseEntity<Equipe> editar(@RequestBody EquipeEdicaoDTO equipeEdicaoDTO){
         try {
-            equipeService.editar(equipeCadastroDTO);
+            equipeService.editar(equipeEdicaoDTO);
             return new ResponseEntity<>( HttpStatus.CREATED);
         }catch (DadosNaoEncontradoException e){
             e.getMessage();
