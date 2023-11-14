@@ -5,6 +5,7 @@ import og.net.api.exception.DadosNaoEncontradoException;
 import og.net.api.exception.EquipeJaExistenteException;
 import og.net.api.exception.EquipeNaoEncontradaException;
 import og.net.api.model.dto.EquipeCadastroDTO;
+import og.net.api.model.dto.EquipeEdicaoDTO;
 import og.net.api.model.dto.IDTO;
 import og.net.api.model.entity.Equipe;
 import og.net.api.model.entity.Usuario;
@@ -19,11 +20,11 @@ public class EquipeService {
 
     private EquipeRepository equipeRepository;
 
-    public void buscarUm(Integer id) throws EquipeNaoEncontradaException {
-        if (!equipeRepository.existsById(id)){
-            throw new EquipeNaoEncontradaException();
+    public Equipe buscarUm(Integer id) throws EquipeNaoEncontradaException {
+        if (equipeRepository.existsById(id)){
+           return equipeRepository.findById(id).get();
         }
-        equipeRepository.findById(id).get();
+        throw new EquipeNaoEncontradaException();
     }
 
     public List<Equipe> buscarEquipesNome(String nome){
@@ -42,16 +43,13 @@ public class EquipeService {
         EquipeCadastroDTO equipeCadastroDTO = (EquipeCadastroDTO) dto;
         Equipe equipe = new Equipe();
         BeanUtils.copyProperties(equipeCadastroDTO,equipe);
-        if (equipeRepository.existsById(equipe.getId())){
-            throw new EquipeJaExistenteException();
-        }
         equipeRepository.save(equipe);
     }
 
     public void editar(IDTO dto) throws DadosNaoEncontradoException {
-        EquipeCadastroDTO equipeCadastroDTO = (EquipeCadastroDTO) dto;
+       EquipeEdicaoDTO equipeEdicaoDTO = (EquipeEdicaoDTO) dto;
         Equipe equipe = new Equipe();
-        BeanUtils.copyProperties(equipeCadastroDTO,equipe);
+        BeanUtils.copyProperties(equipeEdicaoDTO,equipe);
         if (!equipeRepository.existsById(equipe.getId())){
             throw new DadosNaoEncontradoException();
         }

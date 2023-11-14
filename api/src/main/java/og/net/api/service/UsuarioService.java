@@ -6,6 +6,7 @@ import og.net.api.exception.UsuarioInesxistenteException;
 import og.net.api.exception.UsuarioJaExistenteException;
 import og.net.api.model.dto.IDTO;
 import og.net.api.model.dto.UsuarioCadastroDTO;
+import og.net.api.model.dto.UsuarioEdicaoDTO;
 import og.net.api.model.entity.Usuario;
 import og.net.api.repository.UsuarioRepository;
 import org.springframework.beans.BeanUtils;
@@ -20,11 +21,8 @@ public class UsuarioService {
 
      private UsuarioRepository usuarioRepository;
 
-    public void buscarUm(Integer id) throws UsuarioInesxistenteException {
-        if(!usuarioRepository.existsById(id)){
-            throw new UsuarioInesxistenteException();
-        }
-        usuarioRepository.findById(id).get();
+    public Usuario buscarUm(Integer id) {
+            return usuarioRepository.findById(id).get();
     }
 
     public List<Usuario> buscarTodos(){
@@ -35,13 +33,10 @@ public class UsuarioService {
         usuarioRepository.deleteById(id);
     }
 
-    public void cadastrar(IDTO dto) throws UsuarioJaExistenteException {
+    public void cadastrar(IDTO dto) {
         UsuarioCadastroDTO usuarioCadastroDTO = (UsuarioCadastroDTO) dto;
         Usuario usuario = new Usuario();
-        BeanUtils.copyProperties(usuarioCadastroDTO,usuario);
-        if (usuarioRepository.existsById(usuario.getId())){
-            throw new UsuarioJaExistenteException();
-        }
+        BeanUtils.copyProperties(usuarioCadastroDTO, usuario);
         usuarioRepository.save(usuario);
     }
 
@@ -59,12 +54,12 @@ public class UsuarioService {
 
 
     public void editar(IDTO dto) throws DadosNaoEncontradoException {
-        UsuarioCadastroDTO ucdto = (UsuarioCadastroDTO) dto;
+        UsuarioEdicaoDTO ucdto = (UsuarioEdicaoDTO) dto;
         Usuario usuario = new Usuario();
         BeanUtils.copyProperties(ucdto,usuario);
-        if (!usuarioRepository.existsById(usuario.getId())){
-            throw new DadosNaoEncontradoException();
-        }
-        usuarioRepository.save(usuario);
+       if (usuarioRepository.existsById(usuario.getId())){
+           usuarioRepository.save(usuario);
+       }
+       throw new DadosNaoEncontradoException();
     }
 }

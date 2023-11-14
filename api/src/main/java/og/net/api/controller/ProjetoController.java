@@ -3,8 +3,8 @@ package og.net.api.controller;
 import lombok.AllArgsConstructor;
 import og.net.api.exception.*;
 import og.net.api.model.dto.ProjetoCadastroDTO;
+import og.net.api.model.dto.ProjetoEdicaoDTO;
 import og.net.api.model.entity.Projeto;
-import og.net.api.model.entity.Usuario;
 import og.net.api.service.ProjetoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +23,8 @@ public class ProjetoController {
     @GetMapping("/{id}")
     public ResponseEntity<Projeto> buscarUm(@PathVariable Integer id){
         try {
-            projetoService.buscarUm(id);
-            return new ResponseEntity<>(HttpStatus.OK);
+
+            return new ResponseEntity<>(projetoService.buscarUm(id),HttpStatus.OK);
         }catch (ProjetoNaoEncontradoException e){
             e.getMessage();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -49,8 +49,8 @@ public class ProjetoController {
         }
     }
 
-    @DeleteMapping
-    public void deletar(@RequestParam Integer id){
+    @DeleteMapping("/{id}")
+    public void deletar(@PathVariable Integer id){
         projetoService.deletar(id);
     }
 
@@ -59,16 +59,16 @@ public class ProjetoController {
         try{
             projetoService.cadastrar(projetoCadastroDTO);
             return new ResponseEntity<>( HttpStatus.CREATED);
-        }catch (ProjetoJaExistenteException e){
+        }catch (Exception e){
             e.getMessage();
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
 
     @PutMapping
-    public ResponseEntity<Projeto> editar(@RequestBody ProjetoCadastroDTO projetoCadastroDTO){
+    public ResponseEntity<Projeto> editar(@RequestBody ProjetoEdicaoDTO projetoEdicaoDTO){
         try {
-            projetoService.editar(projetoCadastroDTO);
+            projetoService.editar(projetoEdicaoDTO);
             return new ResponseEntity<>( HttpStatus.CREATED);
         }catch (DadosNaoEncontradoException e){
             e.getMessage();

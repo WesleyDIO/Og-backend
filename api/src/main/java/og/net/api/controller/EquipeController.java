@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import og.net.api.exception.*;
 import og.net.api.model.dto.EquipeCadastroDTO;
 import og.net.api.model.entity.Equipe;
-import og.net.api.model.entity.Tarefa;
 import og.net.api.service.EquipeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,8 +48,8 @@ public class EquipeController {
         }
     }
 
-    @DeleteMapping
-    public void deletar(@RequestParam Integer id){
+    @DeleteMapping("/{id}")
+    public void deletar(@PathVariable Integer id){
         equipeService.deletar(id);
     }
 
@@ -59,7 +58,7 @@ public class EquipeController {
         try{
             equipeService.cadastrar(equipeCadastroDTO);
             return new ResponseEntity<>( HttpStatus.CREATED);
-        }catch (EquipeJaExistenteException e){
+        }catch (Exception e){
             e.getMessage();
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }

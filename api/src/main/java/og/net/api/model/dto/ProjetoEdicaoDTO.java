@@ -6,13 +6,13 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-@Data
 @AllArgsConstructor
+@Data
 @NoArgsConstructor
-public class TarefaCadastroDTO implements IDTO{
+public class ProjetoEdicaoDTO implements IDTO {
 
+    private Integer id;
     private String nome;
     private String descricao;
-    private Boolean ativo;
-    private Date data_criacao;
+    private Date data_inicio;
 }

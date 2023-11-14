@@ -2,9 +2,9 @@ package og.net.api.controller;
 
 import lombok.AllArgsConstructor;
 import og.net.api.exception.DadosNaoEncontradoException;
-import og.net.api.exception.UsuarioInesxistenteException;
 import og.net.api.exception.UsuarioJaExistenteException;
 import og.net.api.model.dto.UsuarioCadastroDTO;
+import og.net.api.model.dto.UsuarioEdicaoDTO;
 import og.net.api.model.entity.Usuario;
 import og.net.api.service.UsuarioService;
 import org.springframework.http.HttpStatus;
@@ -24,10 +24,8 @@ public class UsuarioController {
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> buscarUm(@PathVariable Integer id){
         try {
-            usuarioService.buscarUm(id);
-            return new ResponseEntity<>(HttpStatus.OK);
-        }catch (UsuarioInesxistenteException e){
-            e.getMessage();
+            return new ResponseEntity<>(usuarioService.buscarUm(id), HttpStatus.OK);
+        }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -68,8 +66,8 @@ public class UsuarioController {
         }
     }
 
-    @DeleteMapping
-    public void deletar(@RequestParam Integer id){
+    @DeleteMapping("/{id}")
+    public void deletar(@PathVariable Integer id){
         usuarioService.deletar(id);
     }
 
@@ -78,20 +76,19 @@ public class UsuarioController {
         try{
             usuarioService.cadastrar(usuarioCadastroDTO);
             return new ResponseEntity<>( HttpStatus.CREATED);
-        }catch (UsuarioJaExistenteException e){
-            e.getMessage();
+        }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
 
     @PutMapping
-    public ResponseEntity<Usuario> editar(@RequestBody UsuarioCadastroDTO usuarioCadastroDTO){
+    public ResponseEntity<Usuario> editar(@RequestBody UsuarioEdicaoDTO usuarioEdicaoDTO){
         try {
-            usuarioService.editar(usuarioCadastroDTO);
-            return new ResponseEntity<>( HttpStatus.CREATED);
+            usuarioService.editar(usuarioEdicaoDTO);
+            return new ResponseEntity<>(HttpStatus.OK);
         }catch (DadosNaoEncontradoException e){
             e.getMessage();
-            return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

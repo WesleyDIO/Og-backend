@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import og.net.api.exception.DadosNaoEncontradoException;
 import og.net.api.model.dto.IDTO;
 import og.net.api.model.dto.ProjetoCadastroDTO;
+import og.net.api.model.dto.PropriedadeCadastroDTO;
+import og.net.api.model.dto.PropriedadeEdicaoDTO;
 import og.net.api.model.entity.Propriedade;
 import og.net.api.repository.PropriedadeRepository;
 import org.springframework.beans.BeanUtils;
@@ -17,8 +19,8 @@ public class PropriedadeService {
 
     private PropriedadeRepository propriedadeRepository;
 
-    public void buscarUm(Integer id){
-        propriedadeRepository.findById(id).get();
+    public Propriedade buscarUm(Integer id){
+        return propriedadeRepository.findById(id).get();
     }
 
     public List<Propriedade> buscarTodos(){
@@ -30,19 +32,20 @@ public class PropriedadeService {
     }
 
     public void cadastrar(IDTO dto){
-        ProjetoCadastroDTO projetoCadastroDTO = (ProjetoCadastroDTO) dto;
+        PropriedadeCadastroDTO propriedadeCadastroDTO = (PropriedadeCadastroDTO) dto;
         Propriedade propriedade = new Propriedade();
-        BeanUtils.copyProperties(projetoCadastroDTO,propriedade);
+        BeanUtils.copyProperties(propriedadeCadastroDTO,propriedade);
         propriedadeRepository.save(propriedade);
     }
 
     public void editar(IDTO dto) throws DadosNaoEncontradoException {
-        ProjetoCadastroDTO propriedadeCadastroDTO = (ProjetoCadastroDTO) dto;
+        PropriedadeEdicaoDTO propriedadeEdicaoDTO = (PropriedadeEdicaoDTO) dto;
         Propriedade propriedade = new Propriedade();
-        BeanUtils.copyProperties(propriedadeCadastroDTO,propriedade);
-        if (!propriedadeRepository.existsById(propriedade.getId())){
-            throw new DadosNaoEncontradoException();
+        BeanUtils.copyProperties(propriedadeEdicaoDTO,propriedade);
+        if (propriedadeRepository.existsById(propriedade.getId())){
+            propriedadeRepository.save(propriedade);
         }
-        propriedadeRepository.save(propriedade);
+        throw new DadosNaoEncontradoException();
+
     }
 }

@@ -3,6 +3,7 @@ package og.net.api.controller;
 import lombok.AllArgsConstructor;
 import og.net.api.exception.DadosNaoEncontradoException;
 import og.net.api.model.dto.PropriedadeCadastroDTO;
+import og.net.api.model.dto.PropriedadeEdicaoDTO;
 import og.net.api.model.entity.Propriedade;
 import og.net.api.service.PropriedadeService;
 import org.springframework.http.HttpStatus;
@@ -22,8 +23,7 @@ public class PropriedadeController {
     @GetMapping("/{id}")
     public ResponseEntity<Propriedade> buscarUm(@PathVariable Integer id){
         try {
-            propriedadeService.buscarUm(id);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(propriedadeService.buscarUm(id),HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -38,8 +38,8 @@ public class PropriedadeController {
         }
     }
 
-    @DeleteMapping
-    public void deletar(@RequestParam Integer id){
+    @DeleteMapping("/{id}")
+    public void deletar(@PathVariable Integer id){
         propriedadeService.deletar(id);
     }
 
@@ -54,9 +54,9 @@ public class PropriedadeController {
     }
 
     @PutMapping
-    public ResponseEntity<Propriedade> editar(@RequestBody PropriedadeCadastroDTO propriedadeCadastroDTO){
+    public ResponseEntity<Propriedade> editar(@RequestBody PropriedadeEdicaoDTO propriedadeEdicaoDTO){
         try {
-            propriedadeService.editar(propriedadeCadastroDTO);
+            propriedadeService.editar(propriedadeEdicaoDTO);
             return new ResponseEntity<>( HttpStatus.CREATED);
         }catch (DadosNaoEncontradoException e){
             e.getMessage();

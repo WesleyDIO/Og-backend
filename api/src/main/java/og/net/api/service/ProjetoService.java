@@ -6,6 +6,7 @@ import og.net.api.exception.ProjetoJaExistenteException;
 import og.net.api.exception.ProjetoNaoEncontradoException;
 import og.net.api.model.dto.IDTO;
 import og.net.api.model.dto.ProjetoCadastroDTO;
+import og.net.api.model.dto.ProjetoEdicaoDTO;
 import og.net.api.model.entity.Projeto;
 import og.net.api.model.entity.Usuario;
 import og.net.api.repository.ProjetoRepository;
@@ -20,11 +21,12 @@ public class ProjetoService {
 
     private ProjetoRepository projetoRepository;
 
-    public void buscarUm(Integer id) throws ProjetoNaoEncontradoException {
-        if (!projetoRepository.existsById(id)){
-            throw new ProjetoNaoEncontradoException();
+    public Projeto buscarUm(Integer id) throws ProjetoNaoEncontradoException {
+        if (projetoRepository.existsById(id)){
+           return projetoRepository.findById(id).get();
+
         }
-        projetoRepository.findById(id).get();
+        throw new ProjetoNaoEncontradoException();
     }
 
     public List<Projeto> buscarProjetosNome(String nome){
@@ -39,23 +41,20 @@ public class ProjetoService {
         projetoRepository.deleteById(id);
     }
 
-    public void cadastrar(IDTO dto) throws ProjetoJaExistenteException {
+    public void cadastrar(IDTO dto) {
         ProjetoCadastroDTO projetoCadastroDTO = (ProjetoCadastroDTO) dto;
         Projeto projeto = new Projeto();
         BeanUtils.copyProperties(projetoCadastroDTO,projeto);
-        if (projetoRepository.existsById(projeto.getId())){
-            throw new ProjetoJaExistenteException();
-        }
         projetoRepository.save(projeto);
     }
 
     public void editar(IDTO dto) throws DadosNaoEncontradoException {
-        ProjetoCadastroDTO projetoCadastroDTO = (ProjetoCadastroDTO) dto;
+        ProjetoEdicaoDTO projetoEdicaoDTO = (ProjetoEdicaoDTO) dto;
         Projeto projeto = new Projeto();
-        BeanUtils.copyProperties(projetoCadastroDTO,projeto);
-        if (!projetoRepository.existsById(projeto.getId())){
-            throw new DadosNaoEncontradoException();
+        BeanUtils.copyProperties(projetoEdicaoDTO,projeto);
+        if (projetoRepository.existsById(projeto.getId())){
+            projetoRepository.save(projeto);
         }
-        projetoRepository.save(projeto);
+        throw new DadosNaoEncontradoException();
     }
 }

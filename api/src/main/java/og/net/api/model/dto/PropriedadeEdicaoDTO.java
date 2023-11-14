@@ -4,15 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
-@Data
 @AllArgsConstructor
+@Data
 @NoArgsConstructor
-public class TarefaCadastroDTO implements IDTO{
+public class PropriedadeEdicaoDTO implements IDTO {
 
+    private Integer id;
     private String nome;
-    private String descricao;
-    private Boolean ativo;
-    private Date data_criacao;
 }

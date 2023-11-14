@@ -1,5 +1,6 @@
 package og.net.api.repository;
 
+import og.net.api.model.dto.UsuarioCadastroDTO;
 import og.net.api.model.entity.Equipe;
 import og.net.api.model.entity.Projeto;
 import og.net.api.model.entity.Usuario;
@@ -16,4 +17,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     List<Usuario> findByUsername(String username);
 
     List<Usuario> findByEmail(String email);
+
 }

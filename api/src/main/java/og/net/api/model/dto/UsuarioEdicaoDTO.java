@@ -1,21 +1,16 @@
-package og.net.api.model.entity;
+package og.net.api.model.dto;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
-import java.util.Set;
 
-@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "usuario")
-public class Usuario {
-    @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+public class UsuarioEdicaoDTO implements IDTO{
+
     private Integer id;
     private String nome;
     private String sobrenome;
@@ -24,8 +19,4 @@ public class Usuario {
     private String email;
     private String empresa;
     private String senha;
-    @OneToMany
-    private Set<Tarefa> tarefas;
-    @Enumerated(EnumType.STRING)
-    private Permissao permissao;
 }

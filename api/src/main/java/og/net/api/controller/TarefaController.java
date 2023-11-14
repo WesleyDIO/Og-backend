@@ -3,12 +3,9 @@ package og.net.api.controller;
 import lombok.AllArgsConstructor;
 import og.net.api.exception.*;
 import og.net.api.model.dto.TarefaCadastroDTO;
-import og.net.api.model.dto.UsuarioCadastroDTO;
-import og.net.api.model.entity.Projeto;
+import og.net.api.model.dto.TarefaEdicaoDTO;
 import og.net.api.model.entity.Tarefa;
-import og.net.api.model.entity.Usuario;
 import og.net.api.service.TarefaService;
-import og.net.api.service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +23,8 @@ public class TarefaController {
     @GetMapping("/{id}")
     public ResponseEntity<Tarefa> buscarUm(@PathVariable Integer id){
         try {
-            tarefaService.buscarUm(id);
-            return new ResponseEntity<>(HttpStatus.OK);
+
+            return new ResponseEntity<>(tarefaService.buscarUm(id),HttpStatus.OK);
         }catch (TarefaInesxistenteException e){
             e.getMessage();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -52,8 +49,8 @@ public class TarefaController {
         }
     }
 
-    @DeleteMapping
-    public void deletar(@RequestParam Integer id){
+    @DeleteMapping("/{id}")
+    public void deletar(@PathVariable Integer id){
         tarefaService.deletar(id);
     }
 
@@ -62,16 +59,16 @@ public class TarefaController {
         try{
             tarefaService.cadastrar(tarefaCadastroDTO);
             return new ResponseEntity<>( HttpStatus.CREATED);
-        }catch (TarefaJaExistenteException e){
+        }catch (Exception e){
             e.getMessage();
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
 
     @PutMapping
-    public ResponseEntity<Tarefa> editar(@RequestBody TarefaCadastroDTO tarefaCadastroDTO){
+    public ResponseEntity<Tarefa> editar(@RequestBody TarefaEdicaoDTO tarefaEdicaoDTO){
         try {
-            tarefaService.editar(tarefaCadastroDTO);
+            tarefaService.editar(tarefaEdicaoDTO);
             return new ResponseEntity<>( HttpStatus.CREATED);
         }catch (DadosNaoEncontradoException e){
             e.getMessage();

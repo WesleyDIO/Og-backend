@@ -6,6 +6,7 @@ import og.net.api.exception.TarefaInesxistenteException;
 import og.net.api.exception.TarefaJaExistenteException;
 import og.net.api.model.dto.IDTO;
 import og.net.api.model.dto.TarefaCadastroDTO;
+import og.net.api.model.dto.TarefaEdicaoDTO;
 import og.net.api.model.entity.Tarefa;
 import og.net.api.model.entity.Usuario;
 import og.net.api.repository.TarefaRepository;
@@ -20,11 +21,12 @@ public class TarefaService {
 
     private TarefaRepository tarefaRepository;
 
-    public void buscarUm(Integer id) throws TarefaInesxistenteException {
-        if (!tarefaRepository.existsById(id)){
-            throw new TarefaInesxistenteException();
+    public Tarefa buscarUm(Integer id) throws TarefaInesxistenteException {
+        if (tarefaRepository.existsById(id)){
+            return tarefaRepository.findById(id).get();
+
         }
-        tarefaRepository.findById(id).get();
+        throw new TarefaInesxistenteException();
     }
 
     public List<Tarefa> buscarTarefasNome(String nome){
@@ -39,23 +41,22 @@ public class TarefaService {
         tarefaRepository.deleteById(id);
     }
 
-    public void cadastrar(IDTO dto) throws TarefaJaExistenteException {
+    public void cadastrar(IDTO dto) {
         TarefaCadastroDTO tarefaCadastroDTO = (TarefaCadastroDTO) dto;
+        System.out.println(dto);
         Tarefa tarefa = new Tarefa();
         BeanUtils.copyProperties(tarefaCadastroDTO,tarefa);
-        if (tarefaRepository.existsById(tarefa.getId())){
-            throw new TarefaJaExistenteException();
-        }
         tarefaRepository.save(tarefa);
     }
 
     public void editar(IDTO dto) throws DadosNaoEncontradoException {
-        TarefaCadastroDTO tarefaCadastroDTO = (TarefaCadastroDTO) dto;
+        TarefaEdicaoDTO tarefaEdicaoDTO = (TarefaEdicaoDTO) dto;
         Tarefa tarefa = new Tarefa();
-        BeanUtils.copyProperties(tarefaCadastroDTO,tarefa);
-        if (!tarefaRepository.existsById(tarefa.getId())){
-            throw new DadosNaoEncontradoException();
+        BeanUtils.copyProperties(tarefaEdicaoDTO,tarefa);
+        if (tarefaRepository.existsById(tarefa.getId())){
+            tarefaRepository.save(tarefa);
         }
-        tarefaRepository.save(tarefa);
+        throw new DadosNaoEncontradoException();
+
     }
 }

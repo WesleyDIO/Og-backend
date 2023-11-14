@@ -14,7 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "projeto")
-@IdClass(ProjetoIdClass.class)
+
 public class Projeto {
 
     @Id
@@ -28,7 +28,8 @@ public class Projeto {
     private Set<Tarefa> tarefas;
     @OneToMany
     private Set<Propriedade> propriedades;
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "idUsuario")
-    private Usuario usuario;
+    @OneToMany()
+    private Set<Usuario> usuarios;
+    @Enumerated
+    private Permissao permissao;
 }

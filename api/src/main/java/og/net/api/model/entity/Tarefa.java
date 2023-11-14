@@ -23,5 +23,6 @@ public class Tarefa {
     private Date data_criacao;
     @ManyToOne
     private  Propriedade propriedade;
-
+    @Enumerated(EnumType.STRING)
+    private Permissao permissao;
 }

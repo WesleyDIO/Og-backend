@@ -1,11 +1,13 @@
 package og.net.api.model.dto;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import og.net.api.model.entity.Tipo;
-
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+@AllArgsConstructor
+@Data
+@NoArgsConstructor
 public class PropriedadeCadastroDTO implements IDTO{
 
-    private String nome_propriedade;
+    private String nome;
 
 }
