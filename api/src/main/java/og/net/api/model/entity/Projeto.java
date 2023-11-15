@@ -31,5 +31,5 @@ public class Projeto {
     @OneToMany()
     private Set<Usuario> usuarios;
     @Enumerated
-    private Permissao permissao;
+    private Set<Permissao> permissao;
 }

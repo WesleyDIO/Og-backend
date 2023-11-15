@@ -15,7 +15,7 @@ import java.util.Set;
 @Table(name = "usuario")
 public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
     private String sobrenome;
@@ -27,5 +27,13 @@ public class Usuario {
     @OneToMany
     private Set<Tarefa> tarefas;
     @Enumerated(EnumType.STRING)
-    private Permissao permissao;
+    private Set<Permissao> permissao;
+
+//    Criar um atributo de equipe ativa que terá a equipe que o usuario estará usando naquele momento
+//
+//    entity intermediaria que terá um id da equipe e outro do usuario tendo também um id próprio esse terá relação com o usuario sendo esta OneToOne.
+//
+//    entity intermediaria que terá um id de propriedade que terá também um id de tarefas e um de projetos, tendo uma relação OneToMany.
+//
+//    entity intermediaria que tera um id de permissao tendo também um id de tarefa e de usuario, tendo uma relação OneToOne. Isso serve também para projeto_usuario.
 }

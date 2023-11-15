@@ -1,8 +1,12 @@
 package og.net.api.model.dto;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import og.net.api.model.entity.Permissao;
+import og.net.api.model.entity.Propriedade;
 
 import java.util.Date;
 
@@ -16,4 +20,6 @@ public class TarefaEdicaoDTO implements IDTO {
     private String descricao;
     private Boolean ativo;
     private Date data_criacao;
+    private Propriedade propriedade;
+    private Permissao permissao;
 }
