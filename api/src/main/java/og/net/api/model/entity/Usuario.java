@@ -24,10 +24,12 @@ public class Usuario {
     private String email;
     private String empresa;
     private String senha;
-    @OneToMany
-    private Set<Tarefa> tarefas;
-    @Enumerated(EnumType.STRING)
-    private Set<Permissao> permissao;
+    @OneToOne
+    private UsuarioTarefa usuarioTarefa;
+    @OneToOne
+    private UsuarioProjeto usuarioProjeto;
+    @OneToOne
+    private EquipeUsuario equipeUsuario;
 
 //    Criar um atributo de equipe ativa que terá a equipe que o usuario estará usando naquele momento
 //

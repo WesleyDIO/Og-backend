@@ -19,6 +19,4 @@ public class TarefaCadastroDTO implements IDTO{
     private String descricao;
     private Boolean ativo;
     private Date data_criacao;
-    private Propriedade propriedade;
-    private Permissao permissao;
 }

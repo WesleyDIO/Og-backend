@@ -17,6 +17,5 @@ public class EquipeEdicaoDTO implements IDTO {
     private Integer id;
     private String nome;
     private String descricao;
-    private Set<Usuario> usuarios;
     private Projeto projeto;
 }

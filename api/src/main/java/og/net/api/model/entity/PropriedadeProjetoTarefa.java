@@ -5,20 +5,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Collection;
-import java.util.Set;
-
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "equipe")
-public class Equipe {
+public class PropriedadeProjetoTarefa {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String nome;
-    private String descricao;
     @ManyToOne
+    @JoinColumn(name = "propriedade_id")
+    private Propriedade propriedade;
+    @ManyToOne
+    @JoinColumn(name = "projeto_id")
     private Projeto projeto;
+    @ManyToOne
+    @JoinColumn(name = "tarefa_id")
+    private Tarefa tarefa;
 }

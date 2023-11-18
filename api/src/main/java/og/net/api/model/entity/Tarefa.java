@@ -21,8 +21,4 @@ public class Tarefa {
     private String descricao;
     private Boolean ativo;
     private Date data_criacao;
-    @ManyToOne
-    private  Propriedade propriedade;
-    @Enumerated(EnumType.STRING)
-    private Permissao permissao;
 }

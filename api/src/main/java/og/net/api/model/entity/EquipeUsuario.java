@@ -5,20 +5,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Collection;
-import java.util.Set;
-
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "equipe")
-public class Equipe {
+public class EquipeUsuario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String nome;
-    private String descricao;
+    @OneToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
     @ManyToOne
-    private Projeto projeto;
+    @JoinColumn(name="equipe_id")
+    private Equipe equipe;
+
+
 }

@@ -12,7 +12,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UsuarioEdicaoDTO implements IDTO{
+public class UsuarioEdicaoDTO implements IDTO {
 
     private Integer id;
     private String nome;
@@ -21,7 +21,4 @@ public class UsuarioEdicaoDTO implements IDTO{
     private Date data_nascimento;
     private String email;
     private String empresa;
-    private String senha;
-    private Set<Tarefa> tarefas;
-    private Set<Permissao> permissao;
 }

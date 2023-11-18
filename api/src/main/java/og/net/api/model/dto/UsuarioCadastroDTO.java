@@ -21,6 +21,5 @@ public class UsuarioCadastroDTO implements IDTO{
     private String email;
     private String empresa;
     private String senha;
-    private Set<Tarefa> tarefas;
-    private Set<Permissao> permissao;
+
 }

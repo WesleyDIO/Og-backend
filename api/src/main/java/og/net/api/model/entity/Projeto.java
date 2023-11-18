@@ -23,13 +23,4 @@ public class Projeto {
     private String nome;
     private String descricao;
     private Date data_inicio;
-
-    @OneToMany
-    private Set<Tarefa> tarefas;
-    @OneToMany
-    private Set<Propriedade> propriedades;
-    @OneToMany()
-    private Set<Usuario> usuarios;
-    @Enumerated
-    private Set<Permissao> permissao;
 }
