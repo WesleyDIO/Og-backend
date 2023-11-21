@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -21,4 +22,6 @@ public class Tarefa {
     private String descricao;
     private Boolean ativo;
     private Date data_criacao;
+    private Date data_termino;
+
 }

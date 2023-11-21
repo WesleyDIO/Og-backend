@@ -3,13 +3,10 @@ package og.net.api.model.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import og.net.api.model.entity.Permissao;
-import og.net.api.model.entity.Propriedade;
-import og.net.api.model.entity.Tarefa;
-import og.net.api.model.entity.Usuario;
+import og.net.api.model.entity.*;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -19,5 +16,6 @@ public class ProjetoCadastroDTO implements IDTO{
     private String nome;
     private String descricao;
     private Date data_inicio;
-
+    private Date data_termino;
+    private List<Status> status;
 }

@@ -3,15 +3,12 @@ package og.net.api.model.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import og.net.api.model.entity.Projeto;
 
-@Data
 @AllArgsConstructor
+@Data
 @NoArgsConstructor
-public class EquipeEdicaoDTO implements IDTO {
+public class StatusCadastroDTO implements IDTO {
 
-    private Integer id;
     private String nome;
-    private String descricao;
-    private Projeto projeto;
+    private String cor;
 }

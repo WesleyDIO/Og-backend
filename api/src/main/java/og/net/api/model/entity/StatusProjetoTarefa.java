@@ -5,30 +5,23 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UsuarioProjeto {
-
+public class StatusProjetoTarefa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
+    @OneToMany
+    @JoinColumn(name = "status_id")
+    private List<Status> status;
+    @ManyToOne
+    @JoinColumn(name = "tarefa_id")
+    private Tarefa tarefa;
     @ManyToOne
     @JoinColumn(name = "projeto_id")
     private Projeto projeto;
-
-    @OneToOne
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
-
-    @OneToOne
-    @JoinColumn(name = "responsavel_id")
-    private Usuario responsavel;
-
-    @Enumerated(EnumType.ORDINAL)
-    @JoinColumn(name = "permissao_id")
-    private Permissao permissao;
-
 }

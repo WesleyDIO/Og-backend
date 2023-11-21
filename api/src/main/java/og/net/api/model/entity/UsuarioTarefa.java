@@ -18,10 +18,16 @@ public class UsuarioTarefa {
     @ManyToOne
     @JoinColumn(name = "tarefa_id")
     private Tarefa tarefa;
+
     @OneToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
-    @Enumerated
+
+    @OneToOne
+    @JoinColumn(name = "responsavel_id")
+    private Usuario responsavel;
+
+    @Enumerated(EnumType.ORDINAL)
     @JoinColumn(name = "permissao_id")
     private Permissao permissao;
 }
